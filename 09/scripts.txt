@@ -1,0 +1,64 @@
+@*<script type="text/javascript">
+
+
+    var uri = "http://http:/localhost:60397/api/Students";
+        $(document).ready(function () {
+            $.getJSON(uri)
+            .done(function (data) {
+                $.each(data, function (key, item) {
+                    $('#student').append("<tr><td>" + item.StudentId + "</td>" + "<td>" + item.Name + "</td>" + "<td>" + item.lastName + "</td>" + "<td>" + item.RollNo + '%' + "</td>" + "<td>" + item.Class + "</td>" + "<td>" + item.FathersName + "</td>" + "<td>" + item.Address + "</td>" + "<td>" + item.Phone + "</td></tr>");
+                });
+            });
+        });
+
+        function formatItem(item) {
+            return item.Name + '-' + item.RollNo;
+        }
+        function find() {
+            var id = $('#stuId').val();
+            $.getJSON(uri + '/' + id)
+            .done(function (data) {
+                $('#st').text(formatItem(data));
+            })
+            .fail(function (jqXHR, textStatus, err) {
+                $('#student').text('error' + err);
+            })
+        }
+</script>*@  
+
+@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="~/Scripts/jquery-1.9.1.js"></script>
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            var uri = 'http://http:/localhost:60397/api/Students';
+            $("#btnLoad").click(function () {
+                $.ajax({
+                    url: uri,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        //debugger;
+                        //I am creating table using jquery
+                        var table = $("<table/>").addClass("table table-responsive table-bordered");
+                        var header = $("<thead/>").html("<tr><th>FirstName</th><th>Lastname</th><th>Class</th><th>RollNo</th><th>studentdetails</th>");
+                        table.append(header);
+                        $.each(data, function (i,val) {
+                            var row = $("<tr/>");
+
+                            row.append($("<td/>").html(val.FirstName));
+                            row.append($("<td/>").html(val.Lastname));
+                            row.append($("<td/>").html(val.Class));
+                            row.append($("<td/>").html(val.RollNo));
+                            row.append($("<td/>").html(val.studentdetails));
+                            table.append(row);
+                        });
+                        $("#diplayPanel").html(table);
+                    },
+                    error: function () {
+                        alert("An error occured while getting data");
+                    }
+                });
+            });
+        });
+</script>*@

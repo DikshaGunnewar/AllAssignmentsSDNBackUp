@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary list-panel" id="list-panel">
+            <div class="panel-heading list-panel-heading">
+                <h1 class="panel-title list-panel-title">Students</h1>
+                    <button type="button" class="btn btn-default btn-md" data-toggle="modal" data-target="#advancedSearchModal" id="advancedsearch-button">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Advanced Search
+                    </button>
+                    <button type="button" class="btn btn-default btn-md" data-toggle="modal" data-target="#btnCreateStudent" data-url="@Url.Action("Create","Students")" >
+                        <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Add Students
+                    </button>               
+                       @{
+                           Html.RenderPartial("_CreatePartial");
+                        }
+                <button type="button" class="btn btn-default btn-md" data-toggle="modal" data-target="#btnEditStudent" data-url="@Url.Action("Edit","Students")">
+                    <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>Edit
+                </button>
+                @{
+                    Html.RenderPartial("_EditPartial");
+                }
+              </div>
+         </div>
+           <div class="panel-body">
+             <table id="student" class="table table-responsive table-bordered">
+                <thead>
+                     <tr>
+                         <th>FirstName</th>
+                         <th>LastName</th>
+                         <th>RollNo</th>
+                         <th>Class</th>
+                         <th>Father Name</th>
+                         <th>Mother Name</th>
+                         <th>Address</th>
+                         <th>Mobile</th>                      
+                </tr>
+           </thead>
+          </table>
+        </div>
+            
+        </div>
+    </div>
+
+
+
+    
+
+@*<div>
+    <h2>Search by ID</h2>
+
+    <input type="text" size="5" id="stuId" />
+    <input type="button" value="Search" onclick="find();" />
+
+    <p id="data"></p>
+</div>*@
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+    var uri = "http://localhost:60397/api/Students";
+            $(document).ready(function () {
+                $.getJSON(uri)
+                .done(function (data) {
+                    $.each(data, function (key, item) {
+                        $('#student').append("<tr><td>" + item.FirstName + "</td>" + "<td>" + item.LastName + "</td>" + "<td>" + item.RollNo + "</td>" + "<td>" + item.Class + "</td>" + "<td>" + item.studentdetails.FatherName + "</td>" + "<td>" + item.studentdetails.MotherName + "</td>" + "<td>" + item.studentdetails.Address + "</td>" + "<td>" + item.studentdetails.MobileNo + "</td></tr>");
+                    });
+                });
+            });
+
+           /* function formatItem(item) {
+                return item.FirstName + '-' + item.RollNo;
+            }
+
+            function find() {
+                var id = $('#stuId').val();
+                $.getJSON(uri + '/' + id)
+                .done(function (data) {
+                    $('#data').text(formatItem(data));
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#student').text('error' + err);
+                })
+            }*/
+</script>
+
+
+
+
+
+
+
+

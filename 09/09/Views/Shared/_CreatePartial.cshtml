@@ -1,0 +1,220 @@
+﻿@model _09.Models.StudentViewModel
+
+<div class="modal fade" id="btnCreateStudent" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body" style="color: black;">
+               @using (Ajax.BeginForm("Create", "Students", null, new AjaxOptions { HttpMethod = "Post", OnSuccess = "CreateAssetSuccess" }, new { @class = "form-horizontal", role = "form" }))
+               {
+                <div class="form-horizontal">
+                   @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                   @Html.HiddenFor(model => model.Student.Id, new { Value = Guid.NewGuid() })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Student.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Student.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Student.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Student.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Student.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Student.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Student.Class, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Student.Class, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Student.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Student.RollNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Student.RollNo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Student.RollNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Student.studentdetails.FatherName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Student.studentdetails.MotherName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Student.studentdetails.MotherName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Student.studentdetails.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Student.studentdetails.Address, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Student.studentdetails.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Student.studentdetails.MobileNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Student.studentdetails.MobileNo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Student.studentdetails.MobileNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    
+                </div>
+               }
+            <div class="modal-footer">
+                
+                <input type="reset" value="Reset" class="btn btn-danger" onclick="window.location.reload()"/>
+                @*<button type="button" id="Create" class="btn btn-success" onclick="Create()">Save</button>*@
+                @*<input type="submit" value="Create" id="btnAdd" class="btn btn-success" />*@
+                <input type="submit" id="btnAdd" value="Create" class="btn btn-success" />
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $("#btnAdd").click(function () {
+
+        var student1 = {
+            "FirstName": $("#FirstName").val(),
+            "LastName": $("#LastName").val(),
+            "Class": $("#Class").val(),
+            "RollNo": $("#RollNo").val(),
+        };
+
+        $.ajax({
+            type: "POST",
+            url: 'http://localhost:60397/api/Students/PostPersonalDetails',
+            data: JSON.stringify(student1),
+            contentType: "application/json;charset=utf-8",
+            processData: true,
+            success: function (data, status, xhr) {
+                alert("The result is : " + status);
+            },
+            error: function (xhr) {
+                alert(xhr.responseText);
+            }
+        });
+    });
+</script>*@
+@*--------------------A----------------*@
+@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function Create() {
+            alert('Hello');
+            var item = new Object();
+            item.FirstName = $('#FirstName').val();
+            item.LastName = $('#LastName').val();
+            item.Class = $('#Class').val();
+            item.RollNo = $('#RollNo').val();
+
+            /*  item.studentdetails.FatherName = $('#FatherName').val();
+              item.studentdetails.MotherName = $('#MotherName').val();
+              item.studentdetails.Address = $('#Address').val();
+              item.studentdetails.MobileNo = $('#MobileNo').val();*/
+
+            item.FatherName = $('#FatherName').val();
+            item.MotherName = $('#MotherName').val();
+            item.Address = $('#Address').val();
+            item.MobileNo = $('#MobileNo').val();
+
+            $.ajax({
+                url: "http://localhost:60397/api/Students",
+                type: 'POST',
+                dataType: 'json',
+                data: item,
+                success: function (data, textStatus, xhr) {
+                    console.log(data);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log('Error in Operation');
+                }
+            });
+
+
+        }
+
+
+    $(document).ready(function ()
+    {
+
+        $("#btnSave").click(function (e) {
+
+           Create();
+           e.preventDefault();
+
+        });
+
+    });
+
+   
+</script>*@
+@*---------------------P-----------------*@
+
+@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $("#Create").click(function (e) {
+            e.preventDefault();
+            var FirstName = $("#FirstName").val();
+            var LastName = $("#LastName").val();
+            var Class = $("#Class").val();
+            var RollNo = $("#RollNo").val();
+            var FatherName = $("#FatherName").val();
+            var MotherName = $("#MotherName").val();
+            var Address = $("#Address").val();
+            var MobileNo = $("#MobileNo").val();
+            var dataString = 'FirstName=' + FirstName + '&LastName=' + LastName + '&Class=' + Class + '&RollNo=' + RollNo + '&FatherName=' + FatherName + '&MotherName=' +MotherName + '&Address=' + Address + 'MobileNo=' +MobileNo;
+           // var dataString = 'FirstName=' + FirstName + '&LastName=' + LastName + '&Class=' + Class + '&RollNo=' + RollNo + '&FatherName=' + studentdetails.FatherName + '&MotherName=' + studentdetails.MotherName + '&Address=' + studentdetails.Address + 'MobileNo=' + studentdetails.MobileNo;
+            $.ajax({
+                type: 'POST',
+                data: dataString,
+                url: "http://localhost:60397/api/Students",
+                success: function (data) {
+                    console.log(data);
+                    alert(data);
+                }
+            });
+        });
+</script>*@
+
+@*---------------------A-----------------*@
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+$("#btnAdd").click(function () {
+    var PersonalDetails = {
+        "FirstName": $("#FirstName").val(),
+        "LastName": $("#LastName").val(),
+        "RollNo": $("#RollNo").val(),
+        "Class": $("#Class").val(),
+        "FatherName": $("#FatherName").val(),
+        "MotherName": $("#MotherName").val(),
+        "Address": $("#Address").val(),
+        "MobileNo": $("#MobileNo").val()
+    };
+
+    $.ajax({
+        type: "POST",
+        url: 'http://localhost:60397/api/Students',
+        data: JSON.stringify(PersonalDetails),
+        dataType: "json",
+        processData: true,
+        success: function (data, status, xhr) {
+            alert(status);
+            console.log("status");
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    });
+});
+</script>
