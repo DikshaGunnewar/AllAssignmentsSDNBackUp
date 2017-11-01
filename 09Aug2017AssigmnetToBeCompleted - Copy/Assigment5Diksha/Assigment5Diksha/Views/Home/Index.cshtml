@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Assigment5Diksha.Models.Employee>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .button1{
+      margin-top: -5px;
+    margin-left: 634px;
+    margin-bottom: -69px;
+       
+    }
+    
+</style>
+<h2>Index</h2>
+<div style="width:90%">
+    <h2>
+    <button class="btn btn-info pull-right ">@Html.ActionLink("Add Employees", "Create")</button><br />
+    </h2>
+    
+</div>
+
+
+
+<div style="width:90%;">
+    <table id="Jdatatable" class="table table-responsive table-bordered">
+        <thead>
+            <tr>
+                
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Maritial status</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+@section scripts{
+    
+    <script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+        $("#Jdatatable").DataTable({
+            "ajax": {
+                "url": "/Home/GetData",
+                "type": "GET",
+                "datatype":"json"
+            },
+            "columns": [
+                        
+                        { "data": "EmployeeName", "autoWidth": true },
+                        { "data": "Email", "autoWidth": true },
+                        { "data": "PhoneNo", "autoWidth": true },
+                        //{ "data": "MaritialStatus", "autoWidth": true },
+                         { "data": "MaritialStatus", "defaultContent": "<input type='checkbox'>", "autoWidth": true },
+                        { "data": "State", "autoWidth": true },
+                        { "data": "City", "autoWidth": true },
+            {
+            data: null,
+        className: "center",
+        defaultContent: '<a href="../Home/Edit?id=4" class="editor_edit">Edit</a> | <a href="../Home/Detele?id=4" class="editor_remove">Delete</a>'
+    },   
+            ]
+        });
+    });
+    </script>
+}

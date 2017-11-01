@@ -1,0 +1,50 @@
+[
+  {
+    "Id": 1,
+    "Name": "Alex",
+    "Email": "alex@email.com",
+    "Age": 30,
+    "Address": "Nagpur",
+    "Phone": 123456
+  },
+  {
+    "Id": 2,
+    "Name": "Shaun",
+    "Email": "shaun@email.com",
+    "Age": 32,
+    "Address": "Gondia",
+    "Phone": 125544
+  },
+  {
+    "Id": 3,
+    "Name": "Nikhil",
+    "Email": "nikl@email.com",
+    "Age": 24,
+    "Address": "Mumbai",
+    "Phone": 122222
+  },
+  {
+    "Id": 4,
+    "Name": "Animekh",
+    "Email": "ani@email.com",
+    "Age": 31,
+    "Address": "Mumbai",
+    "Phone": 122222
+  },
+  {
+    "Id": 5,
+    "Name": "Manish",
+    "Email": "man@email.com",
+    "Age": 32,
+    "Address": "Mumbai",
+    "Phone": 122222
+  },
+  {
+    "Id": 6,
+    "Name": "Radha",
+    "Email": "radha@email.com",
+    "Age": 30,
+    "Address": "Mumbai",
+    "Phone": 122222
+  }
+]
