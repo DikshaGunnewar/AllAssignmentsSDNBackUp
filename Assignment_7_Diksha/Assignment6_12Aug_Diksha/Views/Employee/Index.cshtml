@@ -1,0 +1,145 @@
+﻿@model IEnumerable<App.Data.Entity.Employee>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .progress, .alert {
+    margin: 15px;}
+
+.alert {
+    display: none;}
+</style>
+
+<h2>Admin Panel</h2>
+<br />
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary  btn-primary" })
+</p>
+<table class="table table-responsive table-striped" style="width: 1263px;">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaritialStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.image)
+        </th>
+        <th>
+           Images
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaritialStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                <img src="@Url.Content("~/Content/img/" + item.Id + "/" + item.image + "")" alt="@item.image" width="100px" height="100px" />
+            </td>
+            <td>
+                <img src="@Url.Content("~/Content/img/" + item.Id + "/" + item.image+ "")"  width="100px" height="100px" />
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = " btn btn-primary btn-sm btn-warning"})
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = " createActor btn btn-primary btn-sm btn-warning", title = "Edit Actor" })*@
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm btn-info" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-primary btn-sm btn-danger " })
+                
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+</div>
+<div class="alert alert-success" role="alert">Loading completed!</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+<script>
+    var $progress = $('.progress');
+    var $progressBar = $('.progress-bar');
+    var $alert = $('.alert');
+
+    setTimeout(function () {
+        $progressBar.css('width', '10%');
+        setTimeout(function () {
+            $progressBar.css('width', '30%');
+            setTimeout(function () {
+                $progressBar.css('width', '100%');
+                setTimeout(function () {
+                    $progress.css('display', 'none');
+                    $alert.css('display', 'block');
+                }, 500); // WAIT 5 milliseconds
+            }, 2000); // WAIT 2 seconds
+        }, 1000); // WAIT 1 seconds
+    }, 1000); // WAIT 1 second
+</script>
+
+<script type="text/javascript">
+        $(document).ready(function () {
+
+            $.ajaxSetup({ cache: false });
+
+            $(".createActor").live("click", function (e) {
+                var $url = $(this).attr('href');
+                var $title = $(this).attr('title');
+
+                var $dialog = $('<div id="modalDialog"></div>');
+                $dialog.empty();
+                $dialog.load($url).dialog({
+                    autoOpen: false,
+                    title: $title,
+                    resizable: false,
+                    height: 300,
+                    width: 380,
+                    show: { effect: 'drop', direction: "up" },
+                    modal: true,
+                    draggable: true
+                });
+                $dialog.dialog('open');
+                return false;
+            });
+
+            $("#btncancel").live("click", function (e) {
+                $("#modalDialog").dialog('close');
+            });
+        });
+</script>
